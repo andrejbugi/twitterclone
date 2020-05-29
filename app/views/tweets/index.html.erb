@@ -1,11 +1,7 @@
 <h1>All Tweets</h1>
 
 
-<%= link_to "Tweet Now", new_tweet_path %>
-
-
 <ul>
-
   <% @tweets.each do |tweet| %>
 
     <li>
@@ -14,11 +10,8 @@
       <%= link_to "Delete Tweet", tweet_path(tweet), method: :delete,
         data: { confirm: "Are you sure you want to delete this tweet?" }
       %>
-
     </li>
 
   <% end %>
-
-
 </ul>
 
