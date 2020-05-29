@@ -1,37 +1,28 @@
-<div class="box">
-  <article class="media">
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong><%= @tweet.title %></strong>
-          <br>
-          <%= @tweet.body %>
-        </p>
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-6">
+        <h1><%= @tweet.title %></h1>
       </div>
-      <div>
-        <button class="button is-dark"><%= link_to "Go Back", root_path %></button>
-        <button class="button is-dark"><%= link_to "Edit Content", edit_tweet_path(@tweet) %></button>
-      </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item" aria-label="reply">
-            <span class="icon is-small">
-              <i class="fas fa-reply" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="retweet">
-            <span class="icon is-small">
-              <i class="fas fa-retweet" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="like">
-            <span class="icon is-small">
-              <i class="fas fa-heart" aria-hidden="true"></i>
-            </span>
-          </a>
-        </div>
-      </nav>
     </div>
-  </article>
+    <div class="column is-6 is-offset-3">
+      <div class="box">
+        <article class="media">
+          <div class="media-content">
+            <div class="content is-size-6">
+              <p>
+                <%= @tweet.body %>
+              </p>
+            </div>
+            <div>
+              <button class="button is-dark"><%= link_to "Go Back", root_path %></button>
+              <button class="button is-info"><%= link_to "Edit Tweet", edit_tweet_path(@tweet) %></button>
+              <button class="button is-danger"><%= link_to "Delete Tweet", tweet_path(@tweet),
+              method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } %></button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
 </div>
-
