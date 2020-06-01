@@ -1,7 +1,6 @@
-<h1>Edit Article</h1>
 
-
-<%= render 'form', submit: 'Update Tweet' %>
-
-
-<button class="button is-dark"><%= link_to "Go Back", root_path %></button>
+<%= render 'form',
+tweet: @tweet,
+submit: 'Update Tweet',
+heading: "Edit Tweet",
+cancel_path: tweet_path(@tweet) %>
