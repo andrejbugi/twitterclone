@@ -14,11 +14,17 @@
                 <%= @tweet.body %>
               </p>
             </div>
-            <div>
-              <button class="button is-dark"><%= link_to "Go Back", root_path %></button>
-              <button class="button is-info"><%= link_to "Edit Tweet", edit_tweet_path(@tweet) %></button>
-              <button class="button is-danger"><%= link_to "Delete Tweet", tweet_path(@tweet),
-              method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } %></button>
+            <div class="field is-grouped">
+              <p class="control">
+                <%= link_to "Go Back", root_path, class: "button is-dark" %>
+              </p>
+              <p class="control">
+                <%= link_to "Edit Tweet", edit_tweet_path(@tweet), class: "button is-info" %>
+              </p>
+              <p class="control">
+                <%= link_to "Delete Tweet", tweet_path(@tweet), class: "button is-danger",
+                method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } %>
+              </p>
             </div>
           </div>
         </article>
