@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
   belongs_to :tweet
-  has_one :tweet
+  validates :author, presence: true
+  validates :body, presence: true
 end
