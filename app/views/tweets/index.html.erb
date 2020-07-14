@@ -10,7 +10,7 @@
       <div class="column is-6 is-offset-3">
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title">
+            <p class="card-header-title is-centered">
               <%= tweet.title %>
             </p>
           </header>
@@ -20,11 +20,13 @@
             </div>
           </div>
           <footer class="card-footer">
-            <%= link_to "Show", tweet_path(tweet), class: "card-footer-item" %>
-            <%= link_to "Edit", edit_tweet_path(tweet), class: "card-footer-item" %>
-            <%= link_to "Delete", tweet_path(tweet), method: :delete,
-            data: { confirm: "Are you sure you want to delete this tweet?" },
-            class: "card-footer-item" %>
+            <% if logged_in? && equal_with_current_user?(tweet.user) %>
+              <%= link_to "Edit", edit_tweet_path(tweet), class: "card-footer-item" %>
+              <%= link_to "Delete", tweet_path(tweet), method: :delete,
+                  data: { confirm: "Are you sure you want to delete this tweet?" },
+                  class: "card-footer-item" %>
+            <% end %>
+              <%= link_to "Show", tweet_path(tweet), class: "card-footer-item" %>
           </footer>
         </div>
       </div>

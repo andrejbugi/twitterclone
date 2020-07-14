@@ -28,11 +28,6 @@
           <%= form_with model: [tweet, comment], local: true do |form| %>
             <div class="field">
               <p class="control">
-                <%= form.text_field :author, class: "input", placeholder: 'Author' %>
-              </p>
-            </div>
-            <div class="field">
-              <p class="control">
                 <%= form.text_area :body, class: "textarea", placeholder: "Add a comment..." %>
               </p>
             </div>
