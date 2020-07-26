@@ -8,12 +8,18 @@ class TweetsController < ApplicationController
   end
 
   def new
-    session_notice(:danger, 'You must be logged in!') unless logged_in?
+    unless logged_in?
+      session_notice(:danger, 'You must be logged in!') and return
+    end
 
     @tweet = Tweet.new
   end
 
   def create
+    unless logged_in?
+      session_notice(:danger, 'You must be logged in!', login_path) and return
+    end
+
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
 
@@ -25,7 +31,9 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    session_notice(:danger, 'You must be logged in!') unless logged_in?
+    unless logged_in?
+      session_notice(:danger, 'You must be logged in!') and return
+    end
 
     @tweet = Tweet.find(params[:id])
 
@@ -35,16 +43,27 @@ class TweetsController < ApplicationController
   end
 
   def update
+    unless logged_in?
+      session_notice(:danger, 'You must be logged in!') and return
+    end
+
     @tweet = Tweet.find(params[:id])
-    if @tweet.update(tweet_params)
-      redirect_to tweet_path(@tweet)
+
+    if equal_with_current_user?(@tweet.user)
+      if @tweet.update(tweet_params)
+        redirect_to tweet_path(@tweet)
+      else
+        render :edit
+      end
     else
-      render :edit
+      session_notice(:danger, 'Wrong User') and return
     end
   end
 
   def destroy
-    session_notice(:danger, 'You must be logged in!') unless logged_in?
+    unless logged_in?
+      session_notice(:danger, 'You must be logged in!') and return
+    end
 
     tweet = Tweet.find(params[:id])
 
@@ -61,5 +80,4 @@ class TweetsController < ApplicationController
   def tweet_params
     params.require(:tweet).permit(:title, :body)
   end
-
 end
